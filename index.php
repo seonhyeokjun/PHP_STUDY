@@ -1,33 +1,23 @@
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>index</title>
-</head>
-<body>
-    <h1>WEB</h1>
-    <ol>
-        <li><a href="index.php?id=HTML">HTML</a></li>
-        <li><a href="index.php?id=CSS">CSS</a></li>
-        <li><a href="index.php?id=JavaScript">JavaScript</a></li>
-    </ol>
+<?php
+    require_once('lib/print.php');
+    require_once('view/top.php');
+?>
+    <a href="create.php">create</a>
+    <?php if(isset($_GET['id'])) { ?>
+        <a href="update.php?id=<?=$_GET['id']?>">update</a>
+        <form action="delete_process.php" method="post">
+            <input type="hidden" name="id" value="<?=$_GET['id']?>">
+            <input type="submit" value="delete">
+        </form>
+    <?php } ?>
     <h2>
         <?php
-            if(isset($_GET['id'])){
-                echo $_GET['id'];
-            } else {
-                echo "Welcome";
-            }
+            print_title();
         ?>
     </h2>
     <?php
-        if(isset($_GET['id'])){
-            echo file_get_contents("data/".$_GET['id']);
-        } else {
-            echo "Hello, PHP";
-        }
+        print_description();
     ?>
-</body>
-</html>
+<?php
+    require_once('view/bottom.php');
+?>
